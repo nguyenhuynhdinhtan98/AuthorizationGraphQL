@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import getAllUser from "../query/getAllUser";
-import logout from "../query/logOut";
+import mutation from "../query/logOut";
+import query from "../query/getAllUser";
 class Header extends Component {
   onLogoutClick() {
     this.props.mutate({
-      refetchQueries: [{ getAllUser }]
+      refetchQueries: [{ query }]
     });
   }
   renderButtons() {
@@ -47,4 +47,4 @@ class Header extends Component {
     );
   }
 }
-export default graphql(logout)(graphql(getAllUser)(Header));
+export default graphql(mutation)(graphql(query)(Header));

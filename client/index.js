@@ -10,8 +10,7 @@ import {
 } from "react-router-dom";
 import { browserHistory } from "react-router";
 import ApolloClient from "apollo-boost";
-import { HttpLink, createHttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import { createHttpLink } from "apollo-link-http";
 import { ApolloProvider } from "react-apollo";
 import App from "./components/App";
 import LoginForm from "./components/Login";

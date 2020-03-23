@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import AuthForm from "./AuthForm";
-import login from "../query/login";
-import getAllUser from "../query/getAllUser";
-
+import mutation from "../query/login";
+import query from "../query/getAllUser";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -11,16 +10,16 @@ class Login extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    console.log(this.props.data.user, nextProps.data.user);
     if (!this.props.data.user && nextProps.data.user) {
       this.props.history.push("/dashboard");
     }
   }
+
   onSubmit({ email, password }) {
     this.props
       .mutate({
         variables: { email, password },
-        refetchQueries: [{ getAllUser }]
+        refetchQueries: [{ query }]
       })
       .catch(res => {
         const errors = res.graphQLErrors.map(error => error.message);
@@ -39,5 +38,4 @@ class Login extends Component {
     );
   }
 }
-
-export default graphql(getAllUser)(graphql(login)(Login));
+export default graphql(query)(graphql(mutation)(Login));
